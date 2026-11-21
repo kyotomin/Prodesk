@@ -1,9 +1,13 @@
 namespace Prodesk.App;
+using Prodesk.Infrastructure;
 
 public partial class Form1 : Form
 {
-    public Form1()
+    private readonly PostgresConnectionFactory _dbFactory;
+
+    public Form1(PostgresConnectionFactory dbFactory)
     {
         InitializeComponent();
+        _dbFactory = _dbFactory;
     }
 }
