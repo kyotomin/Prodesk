@@ -1,0 +1,16 @@
+# enviroment
+.env
+
+# dotnet data
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# ide
+.idea/
+
+#other
+.DS_Store
+Thumbs.db
