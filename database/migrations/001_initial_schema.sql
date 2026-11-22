@@ -12,7 +12,7 @@ CREATE TABLE "projects" (
   "created_at" timestamptz NOT NULL DEFAULT (now()),
   "updated_at" timestamptz NOT NULL DEFAULT (now())
 );
-
+	
 CREATE TABLE "employees" (
   "id" uuid PRIMARY KEY NOT NULL DEFAULT (uuidv7()),
   "full_name" text NOT NULL,
