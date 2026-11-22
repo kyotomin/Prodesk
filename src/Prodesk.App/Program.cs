@@ -10,12 +10,6 @@ static class Program
     static void Main()
     {
         Env.Load();
-        Console.WriteLine(Directory.GetCurrentDirectory());
-        MessageBox.Show(
-            $"dir: {Directory.GetCurrentDirectory()}\n" +
-            $"user: {Environment.GetEnvironmentVariable("DB_USER")}\n" +
-            $"pass length: {Environment.GetEnvironmentVariable("DB_PASSWORD")?.Length}\n" +
-            $"port: {Environment.GetEnvironmentVariable("DB_PORT")}");
 
         var connectionString = GetConnectionString();
 
@@ -35,7 +29,7 @@ static class Program
 
         var builder = new NpgsqlConnectionStringBuilder
         {
-            Host = "127.0.0.1",
+            Host = host,
             Port = int.Parse(port!),
             Database = database,
             Username = user,
