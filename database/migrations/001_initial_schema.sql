@@ -8,7 +8,7 @@ CREATE TABLE "projects" (
   "id" uuid PRIMARY KEY NOT NULL DEFAULT (uuidv7()),
   "title" text NOT NULL,
   "description" text,
-  "status" project_status NOT NULL DEFAULT 'planned',
+  "project_status" project_status NOT NULL DEFAULT 'planned',
   "created_at" timestamptz NOT NULL DEFAULT (now()),
   "updated_at" timestamptz NOT NULL DEFAULT (now())
 );
