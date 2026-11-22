@@ -110,6 +110,7 @@ public class PostgresProjectRepository : IProjectRepository
 
         await using var reader = await command.ExecuteReaderAsync();
 
+        while (await reader.ReadAsync()) {
             var project = new Project
             {
                 Id = reader.GetGuid(0),
@@ -167,5 +168,6 @@ public class PostgresProjectRepository : IProjectRepository
             $"Unknown project status: {status}"
         )
         };
+
     }
 }
