@@ -1,6 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+	  <None Include="..\..\.env"
+	  Link=".env"
+	  CopyToOutputDirectory="PreserveNewest" />
     <ProjectReference Include="..\ProDesk.Core\Prodesk.Core.csproj" />
     <ProjectReference Include="..\ProDesk.Infrastructure\Prodesk.Infrastructure.csproj" />
   </ItemGroup>

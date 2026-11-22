@@ -28,11 +28,31 @@ partial class Form1
     /// </summary>
     private void InitializeComponent()
     {
-        this.components = new System.ComponentModel.Container();
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(800, 450);
-        this.Text = "Form1";
+        btnTestConnection = new Button();
+        SuspendLayout();
+        // 
+        // btnTestConnection
+        // 
+        btnTestConnection.Location = new Point(334, 170);
+        btnTestConnection.Name = "btnTestConnection";
+        btnTestConnection.Size = new Size(114, 47);
+        btnTestConnection.TabIndex = 0;
+        btnTestConnection.Text = "button1";
+        btnTestConnection.UseVisualStyleBackColor = true;
+        btnTestConnection.Click += btnTestConnection_Click;
+        // 
+        // Form1
+        // 
+        AutoScaleDimensions = new SizeF(7F, 15F);
+        AutoScaleMode = AutoScaleMode.Font;
+        ClientSize = new Size(800, 450);
+        Controls.Add(btnTestConnection);
+        Name = "Form1";
+        Text = "Form1";
+        ResumeLayout(false);
     }
 
     #endregion
+
+    private Button btnTestConnection;
 }

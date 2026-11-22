@@ -1,6 +1,7 @@
-namespace Prodesk.App;
+﻿namespace Prodesk.App;
 
 using DotNetEnv;
+using Npgsql;
 using Prodesk.Infrastructure;
 
 static class Program
@@ -9,6 +10,12 @@ static class Program
     static void Main()
     {
         Env.Load();
+        Console.WriteLine(Directory.GetCurrentDirectory());
+        MessageBox.Show(
+            $"dir: {Directory.GetCurrentDirectory()}\n" +
+            $"user: {Environment.GetEnvironmentVariable("DB_USER")}\n" +
+            $"pass length: {Environment.GetEnvironmentVariable("DB_PASSWORD")?.Length}\n" +
+            $"port: {Environment.GetEnvironmentVariable("DB_PORT")}");
 
         var connectionString = GetConnectionString();
 
@@ -26,9 +33,16 @@ static class Program
         var user = Environment.GetEnvironmentVariable("DB_USER");
         var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
-        var connectionString =
-            $"Host={host};Port={port};Database={database};User={user};Password={password}";
+        var builder = new NpgsqlConnectionStringBuilder
+        {
+            Host = "127.0.0.1",
+            Port = int.Parse(port!),
+            Database = database,
+            Username = user,
+            Password = password
+        };
 
-        return connectionString;
+
+        return builder.ConnectionString;
     }
 }
