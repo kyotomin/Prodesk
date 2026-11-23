@@ -143,7 +143,10 @@ public class PostgresProjectRepository : IProjectRepository
 
         await using var reader = await command.ExecuteReaderAsync();
         if (!await reader.ReadAsync())
+        {
             return null;
+        };
+
 
         var project = new Project
         {
