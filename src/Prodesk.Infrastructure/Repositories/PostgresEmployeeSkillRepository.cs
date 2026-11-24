@@ -1,31 +1,33 @@
-﻿using Prodesk.Core.Repositories;
+﻿
 using Prodesk.Core.Entities;
+using Prodesk.Core.Repositories;
 using Prodesk.Infrastructure;
-using System;
 using Npgsql;
 
 namespace Prodesk.Infrastructure.Repositories;
 
-public class PostgresEmployeeSkillRepository : IProjectRepository
+public class PostgresEmployeeSkillRepository : IEmployeeSkillRepository
 {
     private readonly PostgresConnectionFactory _connectionFactory;
 
-    public PostgresProjectRepository(PostgresConnectionFactory connectionFactory)
+    public PostgresEmployeeSkillRepository(
+        PostgresConnectionFactory connectionFactory)
     {
         _connectionFactory = connectionFactory;
     }
 
-    public async Task<IReadOnlyList<EmployeeSkill>> GetByEmployeeIdAsync(Guid employeeId)
+    public async Task<IReadOnlyList<EmployeeSkill>> GetByEmployeeIdAsync(
+        Guid employeeId)
     {
         var employeeSkills = new List<EmployeeSkill>();
 
-        await using var connection = 
-            await _connectionFactory.CreateConnection();
+        await using var connection =
+            await _connectionFactory.CreateConnectionAsync();
 
         var sql = """
-            SELECT employee_id, skill_id
+            SELECT employee_id, skill_id, level
             FROM employee_skills
-            WHERE employee_id = @employeeId
+            WHERE employee_id = @employeeId;
             """;
 
         await using var command = new NpgsqlCommand(sql, connection);
@@ -46,21 +48,19 @@ public class PostgresEmployeeSkillRepository : IProjectRepository
         return employeeSkills;
     }
 
-    public Task AddAsync(EmployeeSkill employeeSkill)
+    public async Task AddAsync(EmployeeSkill employeeSkill)
     {
-        if (employeeSkill.Level < 1 || employeeSkill.Level > 5)
-            throw new ArgumentOutOfRangeException(
-                nameof(employeeSkill.Level),
-                "Уровень навыка должен быть от 1 до 5"
-            );
+        ValidateLevel(employeeSkill.Level);
 
-       await using var connection =
+        await using var connection =
             await _connectionFactory.CreateConnectionAsync();
 
         var sql = """
-        INSERT INTO employee_skills (employee_id, skill_id, level)
-        VALUES (@employeeId, @skillId, @level);
-        """;
+            INSERT INTO employee_skills
+                (employee_id, skill_id, level)
+            VALUES
+                (@employeeId, @skillId, @level);
+            """;
 
         await using var command = new NpgsqlCommand(sql, connection);
 
@@ -71,15 +71,12 @@ public class PostgresEmployeeSkillRepository : IProjectRepository
         await command.ExecuteNonQueryAsync();
     }
 
-    public Task UpdateLevelAsync(Guid employeeId, Guid skillId, int level)
+    public async Task UpdateLevelAsync(
+        Guid employeeId,
+        Guid skillId,
+        int level)
     {
-        if (level < 1 || level > 5)
-        {
-            throw new ArgumentOutOfRangeException(
-            nameof(level),
-            "Уровень навыка должен быть от 1 до 5"
-        );
-        };
+        ValidateLevel(level);
 
         await using var connection =
             await _connectionFactory.CreateConnectionAsync();
@@ -88,7 +85,7 @@ public class PostgresEmployeeSkillRepository : IProjectRepository
             UPDATE employee_skills
             SET level = @level
             WHERE employee_id = @employeeId
-                AND skill_id = @skillId;
+              AND skill_id = @skillId;
             """;
 
         await using var command = new NpgsqlCommand(sql, connection);
@@ -106,10 +103,10 @@ public class PostgresEmployeeSkillRepository : IProjectRepository
             await _connectionFactory.CreateConnectionAsync();
 
         var sql = """
-        DELETE FROM employee_skills
-        WHERE employee_id = @employeeId
-          AND skill_id = @skillId;
-        """;
+            DELETE FROM employee_skills
+            WHERE employee_id = @employeeId
+              AND skill_id = @skillId;
+            """;
 
         await using var command = new NpgsqlCommand(sql, connection);
 
@@ -117,5 +114,16 @@ public class PostgresEmployeeSkillRepository : IProjectRepository
         command.Parameters.AddWithValue("skillId", skillId);
 
         await command.ExecuteNonQueryAsync();
+    }
+
+    private static void ValidateLevel(int level)
+    {
+        if (level < 1 || level > 5)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(level),
+                "Уровень навыка должен быть от 1 до 5"
+            );
+        }
     }
 }
