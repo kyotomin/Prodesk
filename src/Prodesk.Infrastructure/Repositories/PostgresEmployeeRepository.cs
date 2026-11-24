@@ -81,7 +81,7 @@ public class PostgresEmployeeRepository : IEmployeeRepository
         return employee;
     }
 
-    public async Task AddAsync(Employee employee) // Может кинуть ex
+    public async Task AddAsync(Employee employee) // Может кинуть ex (валидация)
     {
         await using var connection =
             await _connectionFactory.CreateConnectionAsync();
@@ -143,6 +143,7 @@ public class PostgresEmployeeRepository : IEmployeeRepository
         await command.ExecuteNonQueryAsync();
     }
 
+    // Простой валидатор полей
     private static void ValidateEmployee(Employee employee)
     {
         if (string.IsNullOrWhiteSpace(employee.FullName))

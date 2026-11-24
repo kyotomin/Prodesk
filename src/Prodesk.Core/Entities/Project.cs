@@ -1,5 +1,6 @@
-namespace Prodesk.Core.Entities;
+﻿namespace Prodesk.Core.Entities;
 
+// Проекты
 public sealed class Project
 {
     public Guid Id { get; init; }
@@ -15,6 +16,7 @@ public sealed class Project
     public DateTime UpdatedAt { get; set; }
 }
 
+// Сотрудники
 public sealed class Employee
 {
     public Guid Id { get; init; }

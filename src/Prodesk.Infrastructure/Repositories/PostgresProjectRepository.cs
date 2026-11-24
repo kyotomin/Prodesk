@@ -1,4 +1,4 @@
-using Prodesk.Core.Repositories;
+﻿using Prodesk.Core.Repositories;
 using Prodesk.Infrastructure;
 using Prodesk.Core.Entities;
 using System.Threading.Tasks;
@@ -161,6 +161,7 @@ public class PostgresProjectRepository : IProjectRepository
         return project;
     }
 
+    // Определение статуса проекта
     private static ProjectStatus ResolveProjectStatus(string status)
     {
         return status switch {
