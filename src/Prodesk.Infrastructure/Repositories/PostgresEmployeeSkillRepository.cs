@@ -126,4 +126,39 @@ public class PostgresEmployeeSkillRepository : IEmployeeSkillRepository
             );
         }
     }
+
+    public async Task<IReadOnlyList<EmployeeSkillInfo>> GetDetailsByEmployeeIdAsync(Guid employeeId)
+    {
+        var skills = new List<EmployeeSkillInfo>();
+
+        await using var connection = 
+            await _connectionFactory.CreateConnectionAsync();
+
+        var sql = """
+            SELECT
+                es.skill_id,
+                s.name,
+                es.level
+            FROM employee_skills AS es
+            INNER JOIN skills s ON s.id = es.skill_id
+            WHERE es.employee_id = @employee_id;
+            """;
+        
+        await using var command = NpgsqlCommand(sql, connection);
+        command.Parameters.AddWithValue("employee_id", employeeId);
+
+        await using var reader = await command.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            skills.Add(new EmployeeSkillInfo
+            {
+                SkillId = reader.GetGuid(0),
+                SkillName = reader.GetString(1),
+                Level = reader.GetInt32(2),
+            });
+        }
+
+        return skills;
+    }
 }

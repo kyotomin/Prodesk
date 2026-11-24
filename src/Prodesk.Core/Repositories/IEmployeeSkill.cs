@@ -11,4 +11,6 @@ public interface IEmployeeSkillRepository
     Task UpdateLevelAsync(Guid employeeId, Guid skillId, int level);
 
     Task DeleteAsync(Guid employeeId, Guid skillId);
+
+    Task<IReadOnlyList<EmployeeSkillInfo>> GetDetailsByEmployeeIdAsync(Guid employeeId);
 }
