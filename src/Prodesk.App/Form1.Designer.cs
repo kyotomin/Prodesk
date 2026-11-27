@@ -252,6 +252,7 @@ partial class Form1
         AddProjectButton.TabIndex = 5;
         AddProjectButton.Text = "Добавить проект";
         AddProjectButton.UseVisualStyleBackColor = false;
+        AddProjectButton.Click += AddProjectButton_Click;
         // 
         // ProjectsSectionLabel
         // 

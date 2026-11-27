@@ -37,6 +37,33 @@ public partial class Form1 : Form
         }
     }
 
+    private async void AddProjectButton_Click(object sender, EventArgs e)
+    {
+        using var form = new AddProjectForm();
+
+        if (form.ShowDialog(this) != DialogResult.OK)
+            return;
+
+        var project = form.CreatedProject!;
+
+        try
+        {
+            await _projectRepository.AddAsync(project);
+
+            var projects = await _projectRepository.GetAllAsync();
+            ProjectsGridView.DataSource = projects;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(
+                ex.Message,
+                "Ошибка сохранения",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
+        }
+    }
+
     private void ConfigureProjectsGrid()
     {
         ProjectsGridView.AutoGenerateColumns = false;

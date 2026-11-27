@@ -53,9 +53,12 @@
             // TitleTextBox
             // 
             TitleTextBox.BackColor = Color.FromArgb(58, 80, 107);
+            TitleTextBox.BorderStyle = BorderStyle.None;
+            TitleTextBox.Font = new Font("Segoe UI", 10F);
+            TitleTextBox.ForeColor = Color.White;
             TitleTextBox.Location = new Point(35, 99);
             TitleTextBox.Name = "TitleTextBox";
-            TitleTextBox.Size = new Size(193, 23);
+            TitleTextBox.Size = new Size(193, 18);
             TitleTextBox.TabIndex = 1;
             // 
             // label1
@@ -83,6 +86,9 @@
             // DescriptionTextBox
             // 
             DescriptionTextBox.BackColor = Color.FromArgb(58, 80, 107);
+            DescriptionTextBox.BorderStyle = BorderStyle.None;
+            DescriptionTextBox.Font = new Font("Segoe UI", 10F);
+            DescriptionTextBox.ForeColor = Color.White;
             DescriptionTextBox.Location = new Point(35, 178);
             DescriptionTextBox.Multiline = true;
             DescriptionTextBox.Name = "DescriptionTextBox";
@@ -123,6 +129,7 @@
             CancelButton.TabIndex = 7;
             CancelButton.Text = "Отмена";
             CancelButton.UseVisualStyleBackColor = false;
+            CancelButton.Click += CancelButton_Click;
             // 
             // SaveButton
             // 

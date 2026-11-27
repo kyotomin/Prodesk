@@ -23,7 +23,7 @@ public class PostgresProjectRepository : IProjectRepository
 
         var sql = """
             INSERT INTO projects (title, description, project_status)
-            VALUES (@title, @description, @project_status);
+            VALUES (@title, @description, @project_status::project_status);
             """;
 
         await using var command  = new NpgsqlCommand(sql, connection);
