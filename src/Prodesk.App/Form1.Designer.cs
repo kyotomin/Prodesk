@@ -28,8 +28,8 @@ partial class Form1
     /// </summary>
     private void InitializeComponent()
     {
-        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
         SidebarPanel = new Panel();
         label3 = new Label();
         label2 = new Label();
@@ -191,24 +191,26 @@ partial class Form1
         ProjectsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         ProjectsGridView.BackgroundColor = Color.FromArgb(28, 37, 65);
         ProjectsGridView.BorderStyle = BorderStyle.None;
-        dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle3.BackColor = Color.FromArgb(58, 80, 107);
-        dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
-        dataGridViewCellStyle3.ForeColor = Color.White;
-        dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-        dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-        ProjectsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-        ProjectsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle4.BackColor = Color.FromArgb(28, 37, 65);
-        dataGridViewCellStyle4.Font = new Font("Segoe UI", 10F);
-        dataGridViewCellStyle4.ForeColor = Color.White;
-        dataGridViewCellStyle4.Padding = new Padding(8);
-        dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(58, 80, 107);
-        dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(91, 192, 190);
-        dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-        ProjectsGridView.DefaultCellStyle = dataGridViewCellStyle4;
+        dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle1.BackColor = Color.FromArgb(58, 80, 107);
+        dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F);
+        dataGridViewCellStyle1.ForeColor = Color.White;
+        dataGridViewCellStyle1.Padding = new Padding(10, 5, 10, 5);
+        dataGridViewCellStyle1.SelectionBackColor = Color.Transparent;
+        dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+        ProjectsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+        ProjectsGridView.ColumnHeadersHeight = 55;
+        ProjectsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle2.BackColor = Color.FromArgb(28, 37, 65);
+        dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F);
+        dataGridViewCellStyle2.ForeColor = Color.White;
+        dataGridViewCellStyle2.Padding = new Padding(10, 5, 10, 5);
+        dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(58, 80, 107);
+        dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(91, 192, 190);
+        dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+        ProjectsGridView.DefaultCellStyle = dataGridViewCellStyle2;
         ProjectsGridView.Dock = DockStyle.Fill;
         ProjectsGridView.EnableHeadersVisualStyles = false;
         ProjectsGridView.GridColor = Color.FromArgb(58, 80, 107);
@@ -217,6 +219,7 @@ partial class Form1
         ProjectsGridView.Name = "ProjectsGridView";
         ProjectsGridView.ReadOnly = true;
         ProjectsGridView.RowHeadersVisible = false;
+        ProjectsGridView.RowTemplate.Height = 55;
         ProjectsGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         ProjectsGridView.Size = new Size(914, 555);
         ProjectsGridView.TabIndex = 1;
@@ -243,7 +246,7 @@ partial class Form1
         AddProjectButton.FlatStyle = FlatStyle.Flat;
         AddProjectButton.Font = new Font("Unispace", 15F, FontStyle.Bold);
         AddProjectButton.ForeColor = Color.White;
-        AddProjectButton.Location = new Point(710, 15);
+        AddProjectButton.Location = new Point(723, 15);
         AddProjectButton.Name = "AddProjectButton";
         AddProjectButton.Size = new Size(188, 31);
         AddProjectButton.TabIndex = 5;
@@ -255,7 +258,7 @@ partial class Form1
         ProjectsSectionLabel.AutoSize = true;
         ProjectsSectionLabel.Font = new Font("Unispace", 15F, FontStyle.Bold);
         ProjectsSectionLabel.ForeColor = Color.White;
-        ProjectsSectionLabel.Location = new Point(13, 18);
+        ProjectsSectionLabel.Location = new Point(0, 18);
         ProjectsSectionLabel.Name = "ProjectsSectionLabel";
         ProjectsSectionLabel.Size = new Size(117, 24);
         ProjectsSectionLabel.TabIndex = 0;
@@ -295,7 +298,7 @@ partial class Form1
         MinimumSize = new Size(1000, 650);
         Name = "Form1";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "Form1";
+        Text = "Prodesk (Курсовая работа Кочкин Семен ИТ2601)";
         SidebarPanel.ResumeLayout(false);
         SidebarPanel.PerformLayout();
         ContentPanel.ResumeLayout(false);

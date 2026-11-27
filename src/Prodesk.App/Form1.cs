@@ -1,17 +1,40 @@
 ﻿namespace Prodesk.App;
 
-using Npgsql;
 using Prodesk.Infrastructure;
+using Prodesk.Core.Repositories;
+using Prodesk.Infrastructure.Repositories;
 
 public partial class Form1 : Form
 {
     private readonly PostgresConnectionFactory _dbFactory;
+    private readonly IProjectRepository _projectRepository;
 
     public Form1(PostgresConnectionFactory dbFactory)
     {
+        _dbFactory = dbFactory;
+        _projectRepository = new PostgresProjectRepository(dbFactory);
         InitializeComponent();
         ConfigureProjectsGrid();
-        _dbFactory = dbFactory;
+        Load += Form1_Load;
+    }
+
+    private async void Form1_Load(object? sender, EventArgs e)
+    {
+        try
+        {
+            var projects = await _projectRepository.GetAllAsync();
+
+            ProjectsGridView.DataSource = projects;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(
+                $"Не удалось загрузить проекты:\n{ex.Message}",
+                "Ошибка",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
+        }
     }
 
     private void ConfigureProjectsGrid()
@@ -48,7 +71,12 @@ public partial class Form1 : Form
             Name = "CreatedAtColumn",
             HeaderText = "Дата создания",
             DataPropertyName = "CreatedAt",
-            FillWeight = 15
+            FillWeight = 15,
+
+            DefaultCellStyle = new DataGridViewCellStyle
+            {
+                Format = "dd.MM.yyyy"
+            }
         });
     }
 }
