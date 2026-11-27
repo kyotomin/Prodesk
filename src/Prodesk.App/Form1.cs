@@ -1,7 +1,8 @@
 ﻿namespace Prodesk.App;
 
-using Prodesk.Infrastructure;
+using Prodesk.Core.Entities;
 using Prodesk.Core.Repositories;
+using Prodesk.Infrastructure;
 using Prodesk.Infrastructure.Repositories;
 
 public partial class Form1 : Form
@@ -105,5 +106,48 @@ public partial class Form1 : Form
                 Format = "dd.MM.yyyy"
             }
         });
+    }
+
+    private void ProjectsGridView_SelectionChanged(object sender, EventArgs e)
+    {
+        bool hasSelection = ProjectsGridView.SelectedRows.Count > 0;
+
+        EditProjectButton.Enabled = hasSelection;
+        DeleteProjectButton.Enabled = hasSelection;
+    }
+
+    private Project? GetSelectedProject()
+    {
+        if (ProjectsGridView.SelectedRows.Count == 0)
+            return null;
+
+        return ProjectsGridView.SelectedRows[0].DataBoundItem as Project;
+    }
+
+    private async void EditProjectButton_Click(object sender, EventArgs e)
+    {
+        var project = GetSelectedProject();
+
+        if (project == null)
+            return;
+
+        using var form = new AddProjectForm(project);
+
+        if (form.ShowDialog(this) != DialogResult.OK)
+            return;
+
+        var updatedProject = form.CreatedProject!;
+
+        try
+        {
+            await _projectRepository.UpdateAsync(updatedProject);
+
+            var projects = await _projectRepository.GetAllAsync();
+            ProjectsGridView.DataSource = projects;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Ошибка редактирования");
+        }
     }
 }

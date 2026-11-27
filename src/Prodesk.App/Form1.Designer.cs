@@ -42,6 +42,8 @@ partial class Form1
         WorkspacePanel = new Panel();
         ProjectsGridView = new DataGridView();
         ProjectsToolbarPanel = new Panel();
+        DeleteProjectButton = new Button();
+        EditProjectButton = new Button();
         AddProjectButton = new Button();
         ProjectsSectionLabel = new Label();
         HeaderPanel = new Panel();
@@ -223,9 +225,12 @@ partial class Form1
         ProjectsGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         ProjectsGridView.Size = new Size(914, 555);
         ProjectsGridView.TabIndex = 1;
+        ProjectsGridView.SelectionChanged += ProjectsGridView_SelectionChanged;
         // 
         // ProjectsToolbarPanel
         // 
+        ProjectsToolbarPanel.Controls.Add(DeleteProjectButton);
+        ProjectsToolbarPanel.Controls.Add(EditProjectButton);
         ProjectsToolbarPanel.Controls.Add(AddProjectButton);
         ProjectsToolbarPanel.Controls.Add(ProjectsSectionLabel);
         ProjectsToolbarPanel.Dock = DockStyle.Top;
@@ -234,6 +239,45 @@ partial class Form1
         ProjectsToolbarPanel.Padding = new Padding(0, 0, 0, 10);
         ProjectsToolbarPanel.Size = new Size(914, 60);
         ProjectsToolbarPanel.TabIndex = 0;
+        // 
+        // DeleteProjectButton
+        // 
+        DeleteProjectButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        DeleteProjectButton.BackColor = Color.FromArgb(58, 80, 107);
+        DeleteProjectButton.Cursor = Cursors.Hand;
+        DeleteProjectButton.Enabled = false;
+        DeleteProjectButton.FlatAppearance.BorderSize = 0;
+        DeleteProjectButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(38, 59, 85);
+        DeleteProjectButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(58, 80, 107);
+        DeleteProjectButton.FlatStyle = FlatStyle.Flat;
+        DeleteProjectButton.Font = new Font("Unispace", 15F, FontStyle.Bold);
+        DeleteProjectButton.ForeColor = Color.White;
+        DeleteProjectButton.Location = new Point(570, 15);
+        DeleteProjectButton.Name = "DeleteProjectButton";
+        DeleteProjectButton.Size = new Size(147, 31);
+        DeleteProjectButton.TabIndex = 7;
+        DeleteProjectButton.Text = "Удалить";
+        DeleteProjectButton.UseVisualStyleBackColor = false;
+        // 
+        // EditProjectButton
+        // 
+        EditProjectButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        EditProjectButton.BackColor = Color.FromArgb(58, 80, 107);
+        EditProjectButton.Cursor = Cursors.Hand;
+        EditProjectButton.Enabled = false;
+        EditProjectButton.FlatAppearance.BorderSize = 0;
+        EditProjectButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(38, 59, 85);
+        EditProjectButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(58, 80, 107);
+        EditProjectButton.FlatStyle = FlatStyle.Flat;
+        EditProjectButton.Font = new Font("Unispace", 15F, FontStyle.Bold);
+        EditProjectButton.ForeColor = Color.White;
+        EditProjectButton.Location = new Point(417, 15);
+        EditProjectButton.Name = "EditProjectButton";
+        EditProjectButton.Size = new Size(147, 31);
+        EditProjectButton.TabIndex = 6;
+        EditProjectButton.Text = "Редактировать";
+        EditProjectButton.UseVisualStyleBackColor = false;
+        EditProjectButton.Click += EditProjectButton_Click;
         // 
         // AddProjectButton
         // 
@@ -330,4 +374,6 @@ partial class Form1
     private Label ProjectsSectionLabel;
     private Button AddProjectButton;
     private DataGridView ProjectsGridView;
+    private Button DeleteProjectButton;
+    private Button EditProjectButton;
 }

@@ -110,6 +110,7 @@
             // 
             StatusComboBox.BackColor = Color.FromArgb(58, 80, 107);
             StatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            StatusComboBox.ForeColor = Color.White;
             StatusComboBox.FormattingEnabled = true;
             StatusComboBox.Location = new Point(35, 332);
             StatusComboBox.Name = "StatusComboBox";

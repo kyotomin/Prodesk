@@ -25,6 +25,26 @@ namespace Prodesk.App
             StatusComboBox.SelectedIndex = 0;
         }
 
+        public AddProjectForm(Project project)
+        {
+            InitializeComponent();
+
+            TitleTextBox.Text = project.Title;
+            DescriptionTextBox.Text = project.Description;
+
+            StatusComboBox.Items.Add("Планируется");
+            StatusComboBox.Items.Add("В работе");
+            StatusComboBox.Items.Add("Завершён");
+
+            StatusComboBox.SelectedIndex = project.Status switch
+            {
+                ProjectStatus.Planned => 0,
+                ProjectStatus.InProgress => 1,
+                ProjectStatus.Finished => 2,
+                _ => 0
+            };
+        }
+
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(TitleTextBox.Text))
