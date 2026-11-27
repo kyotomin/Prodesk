@@ -16,38 +16,6 @@ public class PostgresEmployeeSkillRepository : IEmployeeSkillRepository
         _connectionFactory = connectionFactory;
     }
 
-    public async Task<IReadOnlyList<EmployeeSkill>> GetByEmployeeIdAsync(
-        Guid employeeId)
-    {
-        var employeeSkills = new List<EmployeeSkill>();
-
-        await using var connection =
-            await _connectionFactory.CreateConnectionAsync();
-
-        var sql = """
-            SELECT employee_id, skill_id, level
-            FROM employee_skills
-            WHERE employee_id = @employeeId;
-            """;
-
-        await using var command = new NpgsqlCommand(sql, connection);
-        command.Parameters.AddWithValue("employeeId", employeeId);
-
-        await using var reader = await command.ExecuteReaderAsync();
-
-        while (await reader.ReadAsync())
-        {
-            employeeSkills.Add(new EmployeeSkill
-            {
-                EmployeeId = reader.GetGuid(0),
-                SkillId = reader.GetGuid(1),
-                Level = reader.GetInt32(2)
-            });
-        }
-
-        return employeeSkills;
-    }
-
     public async Task AddAsync(EmployeeSkill employeeSkill)
     {
         ValidateLevel(employeeSkill.Level);
@@ -144,7 +112,7 @@ public class PostgresEmployeeSkillRepository : IEmployeeSkillRepository
             WHERE es.employee_id = @employee_id;
             """;
         
-        await using var command = NpgsqlCommand(sql, connection);
+        await using var command = new NpgsqlCommand(sql, connection);
         command.Parameters.AddWithValue("employee_id", employeeId);
 
         await using var reader = await command.ExecuteReaderAsync();

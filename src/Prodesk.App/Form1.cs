@@ -1,4 +1,4 @@
-namespace Prodesk.App;
+﻿namespace Prodesk.App;
 
 using Npgsql;
 using Prodesk.Infrastructure;
@@ -10,36 +10,45 @@ public partial class Form1 : Form
     public Form1(PostgresConnectionFactory dbFactory)
     {
         InitializeComponent();
+        ConfigureProjectsGrid();
         _dbFactory = dbFactory;
     }
 
-    private async void btnTestConnection_Click(object sender, EventArgs e)
+    private void ConfigureProjectsGrid()
     {
-        try
+        ProjectsGridView.AutoGenerateColumns = false;
+        ProjectsGridView.Columns.Clear();
+
+        ProjectsGridView.Columns.Add(new DataGridViewTextBoxColumn
         {
-            await using var connection =
-                await _dbFactory.CreateConnectionAsync();
+            Name = "TitleColumn",
+            HeaderText = "Название проекта",
+            DataPropertyName = "Title",
+            FillWeight = 30
+        });
 
-            await using var command =
-                new NpgsqlCommand("SELECT version()", connection);
-
-            var result = await command.ExecuteScalarAsync();
-
-            MessageBox.Show(
-                result?.ToString(),
-                "Database connection",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
-        }
-        catch (Exception ex)
+        ProjectsGridView.Columns.Add(new DataGridViewTextBoxColumn
         {
-            MessageBox.Show(
-                ex.Message,
-                "Database error",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
-            );
-        }
+            Name = "DescriptionColumn",
+            HeaderText = "Описание",
+            DataPropertyName = "Description",
+            FillWeight = 40
+        });
+
+        ProjectsGridView.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            Name = "StatusColumn",
+            HeaderText = "Статус",
+            DataPropertyName = "Status",
+            FillWeight = 15
+        });
+
+        ProjectsGridView.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            Name = "CreatedAtColumn",
+            HeaderText = "Дата создания",
+            DataPropertyName = "CreatedAt",
+            FillWeight = 15
+        });
     }
 }
