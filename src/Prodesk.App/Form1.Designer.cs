@@ -28,12 +28,12 @@ partial class Form1
     /// </summary>
     private void InitializeComponent()
     {
-        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
         SidebarPanel = new Panel();
         label3 = new Label();
         label2 = new Label();
-        button2 = new Button();
+        ProjectsButton = new Button();
         SelectionButton = new Button();
         EmployeesButton = new Button();
         label1 = new Label();
@@ -47,7 +47,7 @@ partial class Form1
         AddProjectButton = new Button();
         ProjectsSectionLabel = new Label();
         HeaderPanel = new Panel();
-        ProjectsLabel = new Label();
+        PageTitleLabel = new Label();
         SidebarPanel.SuspendLayout();
         ContentPanel.SuspendLayout();
         WorkspacePanel.SuspendLayout();
@@ -60,7 +60,7 @@ partial class Form1
         // 
         SidebarPanel.Controls.Add(label3);
         SidebarPanel.Controls.Add(label2);
-        SidebarPanel.Controls.Add(button2);
+        SidebarPanel.Controls.Add(ProjectsButton);
         SidebarPanel.Controls.Add(SelectionButton);
         SidebarPanel.Controls.Add(EmployeesButton);
         SidebarPanel.Controls.Add(label1);
@@ -91,22 +91,22 @@ partial class Form1
         label2.TabIndex = 5;
         label2.Text = "© Кочкин Семен";
         // 
-        // button2
+        // ProjectsButton
         // 
-        button2.BackColor = Color.FromArgb(91, 192, 190);
-        button2.Cursor = Cursors.Hand;
-        button2.FlatAppearance.BorderSize = 0;
-        button2.FlatAppearance.MouseDownBackColor = Color.FromArgb(38, 59, 85);
-        button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(58, 80, 107);
-        button2.FlatStyle = FlatStyle.Flat;
-        button2.Font = new Font("Unispace", 15F, FontStyle.Bold);
-        button2.ForeColor = Color.White;
-        button2.Location = new Point(57, 276);
-        button2.Name = "button2";
-        button2.Size = new Size(118, 33);
-        button2.TabIndex = 4;
-        button2.Text = "Проекты";
-        button2.UseVisualStyleBackColor = false;
+        ProjectsButton.BackColor = Color.FromArgb(91, 192, 190);
+        ProjectsButton.Cursor = Cursors.Hand;
+        ProjectsButton.FlatAppearance.BorderSize = 0;
+        ProjectsButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(38, 59, 85);
+        ProjectsButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(58, 80, 107);
+        ProjectsButton.FlatStyle = FlatStyle.Flat;
+        ProjectsButton.Font = new Font("Unispace", 15F, FontStyle.Bold);
+        ProjectsButton.ForeColor = Color.White;
+        ProjectsButton.Location = new Point(57, 276);
+        ProjectsButton.Name = "ProjectsButton";
+        ProjectsButton.Size = new Size(118, 33);
+        ProjectsButton.TabIndex = 4;
+        ProjectsButton.Text = "Проекты";
+        ProjectsButton.UseVisualStyleBackColor = false;
         // 
         // SelectionButton
         // 
@@ -193,26 +193,26 @@ partial class Form1
         ProjectsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         ProjectsGridView.BackgroundColor = Color.FromArgb(28, 37, 65);
         ProjectsGridView.BorderStyle = BorderStyle.None;
-        dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle1.BackColor = Color.FromArgb(58, 80, 107);
-        dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F);
-        dataGridViewCellStyle1.ForeColor = Color.White;
-        dataGridViewCellStyle1.Padding = new Padding(10, 5, 10, 5);
-        dataGridViewCellStyle1.SelectionBackColor = Color.Transparent;
-        dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-        ProjectsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+        dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle3.BackColor = Color.FromArgb(58, 80, 107);
+        dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
+        dataGridViewCellStyle3.ForeColor = Color.White;
+        dataGridViewCellStyle3.Padding = new Padding(10, 5, 10, 5);
+        dataGridViewCellStyle3.SelectionBackColor = Color.Transparent;
+        dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+        ProjectsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
         ProjectsGridView.ColumnHeadersHeight = 55;
         ProjectsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle2.BackColor = Color.FromArgb(28, 37, 65);
-        dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F);
-        dataGridViewCellStyle2.ForeColor = Color.White;
-        dataGridViewCellStyle2.Padding = new Padding(10, 5, 10, 5);
-        dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(58, 80, 107);
-        dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(91, 192, 190);
-        dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-        ProjectsGridView.DefaultCellStyle = dataGridViewCellStyle2;
+        dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle4.BackColor = Color.FromArgb(28, 37, 65);
+        dataGridViewCellStyle4.Font = new Font("Segoe UI", 10F);
+        dataGridViewCellStyle4.ForeColor = Color.White;
+        dataGridViewCellStyle4.Padding = new Padding(10, 5, 10, 5);
+        dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(58, 80, 107);
+        dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(91, 192, 190);
+        dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+        ProjectsGridView.DefaultCellStyle = dataGridViewCellStyle4;
         ProjectsGridView.Dock = DockStyle.Fill;
         ProjectsGridView.EnableHeadersVisualStyles = false;
         ProjectsGridView.GridColor = Color.FromArgb(58, 80, 107);
@@ -313,24 +313,24 @@ partial class Form1
         // HeaderPanel
         // 
         HeaderPanel.BorderStyle = BorderStyle.FixedSingle;
-        HeaderPanel.Controls.Add(ProjectsLabel);
+        HeaderPanel.Controls.Add(PageTitleLabel);
         HeaderPanel.Dock = DockStyle.Top;
         HeaderPanel.Location = new Point(0, 0);
         HeaderPanel.Name = "HeaderPanel";
         HeaderPanel.Size = new Size(954, 56);
         HeaderPanel.TabIndex = 0;
         // 
-        // ProjectsLabel
+        // PageTitleLabel
         // 
-        ProjectsLabel.AutoSize = true;
-        ProjectsLabel.Font = new Font("Unispace", 15F, FontStyle.Bold);
-        ProjectsLabel.ForeColor = Color.White;
-        ProjectsLabel.Location = new Point(15, 14);
-        ProjectsLabel.Name = "ProjectsLabel";
-        ProjectsLabel.Size = new Size(79, 24);
-        ProjectsLabel.TabIndex = 0;
-        ProjectsLabel.Text = "Проекты";
-        ProjectsLabel.TextAlign = ContentAlignment.MiddleCenter;
+        PageTitleLabel.AutoSize = true;
+        PageTitleLabel.Font = new Font("Unispace", 15F, FontStyle.Bold);
+        PageTitleLabel.ForeColor = Color.White;
+        PageTitleLabel.Location = new Point(15, 14);
+        PageTitleLabel.Name = "PageTitleLabel";
+        PageTitleLabel.Size = new Size(79, 24);
+        PageTitleLabel.TabIndex = 0;
+        PageTitleLabel.Text = "Проекты";
+        PageTitleLabel.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // Form1
         // 
@@ -364,12 +364,12 @@ partial class Form1
     private Panel ContentPanel;
     private Label label1;
     private Button EmployeesButton;
-    private Button button2;
+    private Button ProjectsButton;
     private Button SelectionButton;
     private Label label3;
     private Label label2;
     private Panel HeaderPanel;
-    private Label ProjectsLabel;
+    private Label PageTitleLabel;
     private Panel WorkspacePanel;
     private Panel ProjectsToolbarPanel;
     private Label ProjectsSectionLabel;

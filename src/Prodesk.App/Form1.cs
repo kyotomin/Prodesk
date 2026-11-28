@@ -10,13 +10,29 @@ public partial class Form1 : Form
 {
     private readonly PostgresConnectionFactory _dbFactory;
     private readonly IProjectRepository _projectRepository;
+    private readonly EmployeesView _employeesView;
 
     public Form1(PostgresConnectionFactory dbFactory)
     {
         _dbFactory = dbFactory;
         _projectRepository = new PostgresProjectRepository(dbFactory);
+
         InitializeComponent();
+        ProjectsButton.Click += (s, e) => ShowProjects();
+        EmployeesButton.Click += async (s, e) =>
+        {
+            await ShowEmployeesAsync();
+        };
         ConfigureProjectsGrid();
+
+        _employeesView = new EmployeesView(dbFactory);
+        _employeesView.Dock = DockStyle.Fill;
+        _employeesView.Visible = false;
+
+        WorkspacePanel.Controls.Add(_employeesView);
+        _employeesView.BringToFront();
+
+
         Load += Form1_Load; // Предзагрузка проектов (подписка на обработчик)
     }
 
@@ -199,5 +215,28 @@ public partial class Form1 : Form
         {
             MessageBox.Show(ex.Message, "Ошибка удаления");
         }
+    }
+
+    // Управление текущей открытой вкладкой
+    private void ShowProjects()
+    {
+        _employeesView.Visible = false;
+
+        ProjectsToolbarPanel.Visible = true;
+        ProjectsGridView.Visible = true;
+        PageTitleLabel.Text = "Проекты";
+    }
+
+    private async Task ShowEmployeesAsync()
+    {
+        ProjectsToolbarPanel.Visible = false;
+        ProjectsGridView.Visible = false;
+
+        _employeesView.Visible = true;
+        _employeesView.BringToFront();
+
+        PageTitleLabel.Text = "Сотрудники";
+
+        await _employeesView.LoadEmployeesAsync();
     }
 }

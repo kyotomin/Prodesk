@@ -35,7 +35,7 @@
             DescriptionTextBox = new TextBox();
             label3 = new Label();
             StatusComboBox = new ComboBox();
-            CancelButton = new Button();
+            CloseButton = new Button();
             SaveButton = new Button();
             SuspendLayout();
             // 
@@ -117,20 +117,20 @@
             StatusComboBox.Size = new Size(135, 23);
             StatusComboBox.TabIndex = 6;
             // 
-            // CancelButton
+            // CloseButton
             // 
-            CancelButton.BackColor = Color.FromArgb(58, 80, 107);
-            CancelButton.Cursor = Cursors.Hand;
-            CancelButton.FlatAppearance.BorderSize = 0;
-            CancelButton.FlatStyle = FlatStyle.Flat;
-            CancelButton.ForeColor = Color.White;
-            CancelButton.Location = new Point(290, 324);
-            CancelButton.Name = "CancelButton";
-            CancelButton.Size = new Size(80, 37);
-            CancelButton.TabIndex = 7;
-            CancelButton.Text = "Отмена";
-            CancelButton.UseVisualStyleBackColor = false;
-            CancelButton.Click += CancelButton_Click;
+            CloseButton.BackColor = Color.FromArgb(58, 80, 107);
+            CloseButton.Cursor = Cursors.Hand;
+            CloseButton.FlatAppearance.BorderSize = 0;
+            CloseButton.FlatStyle = FlatStyle.Flat;
+            CloseButton.ForeColor = Color.White;
+            CloseButton.Location = new Point(290, 324);
+            CloseButton.Name = "CloseButton";
+            CloseButton.Size = new Size(80, 37);
+            CloseButton.TabIndex = 7;
+            CloseButton.Text = "Отмена";
+            CloseButton.UseVisualStyleBackColor = false;
+            CloseButton.Click += CancelButton_Click;
             // 
             // SaveButton
             // 
@@ -154,7 +154,7 @@
             BackColor = Color.FromArgb(28, 37, 65);
             ClientSize = new Size(484, 391);
             Controls.Add(SaveButton);
-            Controls.Add(CancelButton);
+            Controls.Add(CloseButton);
             Controls.Add(StatusComboBox);
             Controls.Add(label3);
             Controls.Add(DescriptionTextBox);
@@ -181,7 +181,7 @@
         private TextBox DescriptionTextBox;
         private Label label3;
         private ComboBox StatusComboBox;
-        private Button CancelButton;
+        private Button CloseButton;
         private Button SaveButton;
     }
 }
