@@ -54,7 +54,7 @@ public class PostgresProjectRepository : IProjectRepository
             UPDATE projects
             SET title = @title,
                 description = @description,
-                project_status = @status,
+                project_status = @status::project_status,
                 updated_at = now()
             WHERE id = @id;
             """;

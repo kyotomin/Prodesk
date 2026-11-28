@@ -258,6 +258,7 @@ partial class Form1
         DeleteProjectButton.TabIndex = 7;
         DeleteProjectButton.Text = "Удалить";
         DeleteProjectButton.UseVisualStyleBackColor = false;
+        DeleteProjectButton.Click += DeleteProjectButton_Click;
         // 
         // EditProjectButton
         // 

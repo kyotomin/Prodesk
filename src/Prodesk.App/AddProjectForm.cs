@@ -13,28 +13,27 @@ namespace Prodesk.App
 {
     public partial class AddProjectForm : Form
     {
+        private readonly Guid _projectId;
+        private readonly DateTime _createdAt;
+
         public Project? CreatedProject { get; private set; }
-        public AddProjectForm()
+
+        // Обработка в конструкторе двух сценариев (создание и редактирование)
+        public AddProjectForm(Project? project = null)
         {
             InitializeComponent();
+            ConfigureStatusComboBox();
 
-            StatusComboBox.Items.Add("Планируется");
-            StatusComboBox.Items.Add("В работе");
-            StatusComboBox.Items.Add("Завершён");
+            if (project == null)
+            {
+                return; 
+            }
 
-            StatusComboBox.SelectedIndex = 0;
-        }
-
-        public AddProjectForm(Project project)
-        {
-            InitializeComponent();
+            _projectId = project.Id;
+            _createdAt = project.CreatedAt;
 
             TitleTextBox.Text = project.Title;
             DescriptionTextBox.Text = project.Description;
-
-            StatusComboBox.Items.Add("Планируется");
-            StatusComboBox.Items.Add("В работе");
-            StatusComboBox.Items.Add("Завершён");
 
             StatusComboBox.SelectedIndex = project.Status switch
             {
@@ -63,10 +62,12 @@ namespace Prodesk.App
 
             CreatedProject = new Project
             {
+                Id = _projectId,
+                CreatedAt = _createdAt,
                 Title = TitleTextBox.Text.Trim(),
                 Description = string.IsNullOrWhiteSpace(DescriptionTextBox.Text)
-                    ? null
-                    : DescriptionTextBox.Text.Trim(),
+        ? null
+        : DescriptionTextBox.Text.Trim(),
                 Status = status
             };
 
@@ -78,5 +79,14 @@ namespace Prodesk.App
         {
             Close();
         }
+
+        private void ConfigureStatusComboBox()
+        {
+                StatusComboBox.Items.Add("Планируется");
+                StatusComboBox.Items.Add("В работе");
+                StatusComboBox.Items.Add("Завершён");
+
+                StatusComboBox.SelectedIndex = 0;
+            }
     }
 }

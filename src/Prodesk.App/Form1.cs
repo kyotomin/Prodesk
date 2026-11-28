@@ -1,5 +1,6 @@
 ﻿namespace Prodesk.App;
 
+using System.Threading.Tasks;
 using Prodesk.Core.Entities;
 using Prodesk.Core.Repositories;
 using Prodesk.Infrastructure;
@@ -16,7 +17,7 @@ public partial class Form1 : Form
         _projectRepository = new PostgresProjectRepository(dbFactory);
         InitializeComponent();
         ConfigureProjectsGrid();
-        Load += Form1_Load;
+        Load += Form1_Load; // Предзагрузка проектов (подписка на обработчик)
     }
 
     private async void Form1_Load(object? sender, EventArgs e)
@@ -43,7 +44,10 @@ public partial class Form1 : Form
         using var form = new AddProjectForm();
 
         if (form.ShowDialog(this) != DialogResult.OK)
+        {
             return;
+        }
+        ;
 
         var project = form.CreatedProject!;
 
@@ -119,7 +123,10 @@ public partial class Form1 : Form
     private Project? GetSelectedProject()
     {
         if (ProjectsGridView.SelectedRows.Count == 0)
+        {
             return null;
+        }
+        ;
 
         return ProjectsGridView.SelectedRows[0].DataBoundItem as Project;
     }
@@ -129,12 +136,18 @@ public partial class Form1 : Form
         var project = GetSelectedProject();
 
         if (project == null)
+        {
             return;
+        }
+        ;
 
         using var form = new AddProjectForm(project);
 
         if (form.ShowDialog(this) != DialogResult.OK)
+        {
             return;
+        }
+        ;
 
         var updatedProject = form.CreatedProject!;
 
@@ -148,6 +161,43 @@ public partial class Form1 : Form
         catch (Exception ex)
         {
             MessageBox.Show(ex.Message, "Ошибка редактирования");
+        }
+    }
+
+    private async Task LoadProjectsAsync()
+    {
+        var projects = await _projectRepository.GetAllAsync();
+        ProjectsGridView.DataSource = projects;
+    }
+
+    private async void DeleteProjectButton_Click(object sender, EventArgs e)
+    {
+        var project = GetSelectedProject();
+
+        if (project == null) 
+        { 
+            return;
+        };
+
+        var result = MessageBox.Show(
+        $"Удалить проект «{project.Title}»?",
+        "Подтверждение удаления",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Warning);
+
+        if (result != DialogResult.Yes) 
+        {
+            return;
+        };
+
+        try
+        {
+            await _projectRepository.DeleteAsync(project.Id);
+            await LoadProjectsAsync();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Ошибка удаления");
         }
     }
 }
